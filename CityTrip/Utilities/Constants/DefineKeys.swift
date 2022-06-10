@@ -7,5 +7,5 @@
 
 import Foundation
 
-let kBaseServer = "https://api.opendota.com/api/"
+let kBaseServer = "https://countriesnow.space/api/v0.1/"
 let kUserRepoServer = "https://api.github.com/users/"
