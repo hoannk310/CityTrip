@@ -7,15 +7,22 @@
 
 import UIKit
 import SwiftyJSON
+import SVProgressHUD
 
 class CountriesViewController: UIViewController {
 
+    @IBOutlet weak var viewSearch: UIView!
+    @IBOutlet weak var searchTF: UITextField!
     @IBOutlet weak var countriesTableView: UITableView!
     private var sections: [CountriesSection] = []
+    private var countries: [Country] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         setupData()
+        setupTextField()
+        viewSearch.layer.cornerRadius = 15
+        countriesTableView.keyboardDismissMode = .onDrag
     }
     
     func setupTableView() {
@@ -24,6 +31,10 @@ class CountriesViewController: UIViewController {
                                     forCellReuseIdentifier: CountryTableViewCell.identifier)
         countriesTableView.delegate = self
         countriesTableView.dataSource = self
+    }
+    
+    func setupTextField() {
+        searchTF.delegate = self
     }
     
     func setupData() {
@@ -40,20 +51,43 @@ class CountriesViewController: UIViewController {
             let listData = response["data"].arrayValue
             listData.forEach { country in
                 let name = country["country"].stringValue
-                let firstCharacter = String(describing: name.prefix(1))
-                if !sections.contains(where: {$0.firstCharacter == firstCharacter}) {
-                    sections.append(CountriesSection(firstCharacter: firstCharacter, contries: [Country(name: name)]))
-                } else {
-                    let index = sections.firstIndex(where: {$0.firstCharacter == firstCharacter})!
-                    if sections[index].contries.contains(where: {$0.name != name}) {
-                        sections[index].contries.append(Country(name: name))
-                    }
+                if !countries.contains(where: {$0.name == name}) {
+                    countries.append(Country(name: name))
                 }
             }
+            setDataSections()
             countriesTableView.reloadData()
         } catch _ {
             
         }
+    }
+    
+    func setDataSections(text: String = "") {
+        if text.isEmpty {
+            countries.forEach { country in
+                let firstCharacter = String(describing: country.name.prefix(1))
+                if !sections.contains(where: {$0.firstCharacter == firstCharacter}) {
+                    sections.append(CountriesSection(firstCharacter: firstCharacter, contries: [country]))
+                } else {
+                    let index = sections.firstIndex(where: {$0.firstCharacter == firstCharacter})!
+                    if sections[index].contries.contains(where: {$0.name != country.name}) {
+                        sections[index].contries.append(country)
+                    }
+                }
+            }
+            sections = sections.sorted(by: {$0.firstCharacter < $1.firstCharacter})
+        } else {
+            let countriesSearch = countries.filter({$0.name.contains(text)})
+            sections.append(CountriesSection(firstCharacter: "Search results: " + text, contries: countriesSearch))
+        }
+    }
+    
+    @objc func handleSearchTextField(){
+        let text = searchTF.text ?? ""
+        sections.removeAll()
+        setDataSections(text: text)
+        SVProgressHUD.dismiss()
+        countriesTableView.reloadData()
     }
 }
 
@@ -75,8 +109,26 @@ extension CountriesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sections[section].firstCharacter
     }
-    
 }
+
+extension CountriesViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(handleSearchTextField), object: nil)
+        SVProgressHUD.show()
+        perform(#selector(handleSearchTextField),with: textField, afterDelay: 1)
+        return true
+    }
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        SVProgressHUD.show()
+        perform(#selector(handleSearchTextField),with: textField, afterDelay: 1)
+        return true
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchTF.becomeFirstResponder()
+        return true
+    }
+}
+
 
 struct Country {
     var name: String
