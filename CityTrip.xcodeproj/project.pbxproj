@@ -36,6 +36,12 @@
 		F0A973932853276C00632BF6 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9738E2853276C00632BF6 /* WebViewController.swift */; };
 		F0A973942853276C00632BF6 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0A9738F2853276C00632BF6 /* WebViewController.xib */; };
 		F0A97397285329AC00632BF6 /* ResponseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A97396285329AC00632BF6 /* ResponseObject.swift */; };
+		F0A9739E28533E5700632BF6 /* CountriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9739C28533E5700632BF6 /* CountriesViewController.swift */; };
+		F0A9739F28533E5700632BF6 /* CountriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0A9739D28533E5700632BF6 /* CountriesViewController.xib */; };
+		F0A973A228533E6700632BF6 /* LocateCitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A973A028533E6700632BF6 /* LocateCitiesViewController.swift */; };
+		F0A973A328533E6700632BF6 /* LocateCitiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0A973A128533E6700632BF6 /* LocateCitiesViewController.xib */; };
+		F0A973A628533E7A00632BF6 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A973A428533E7A00632BF6 /* FavoriteViewController.swift */; };
+		F0A973A728533E7A00632BF6 /* FavoriteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0A973A528533E7A00632BF6 /* FavoriteViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +78,12 @@
 		F0A9738E2853276C00632BF6 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		F0A9738F2853276C00632BF6 /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
 		F0A97396285329AC00632BF6 /* ResponseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseObject.swift; sourceTree = "<group>"; };
+		F0A9739C28533E5700632BF6 /* CountriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesViewController.swift; sourceTree = "<group>"; };
+		F0A9739D28533E5700632BF6 /* CountriesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountriesViewController.xib; sourceTree = "<group>"; };
+		F0A973A028533E6700632BF6 /* LocateCitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocateCitiesViewController.swift; sourceTree = "<group>"; };
+		F0A973A128533E6700632BF6 /* LocateCitiesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocateCitiesViewController.xib; sourceTree = "<group>"; };
+		F0A973A428533E7A00632BF6 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		F0A973A528533E7A00632BF6 /* FavoriteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +248,9 @@
 		F0A973952853277100632BF6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F0A9739B28533E3300632BF6 /* Favorite */,
+				F0A9739A28533E2400632BF6 /* LocateCity */,
+				F0A9739928533E1600632BF6 /* Country */,
 				F0A97343285326B900632BF6 /* Main.storyboard */,
 				F0A97341285326B900632BF6 /* ViewController.swift */,
 				F0A973892853276C00632BF6 /* Splash */,
@@ -251,6 +266,33 @@
 				F0A97396285329AC00632BF6 /* ResponseObject.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		F0A9739928533E1600632BF6 /* Country */ = {
+			isa = PBXGroup;
+			children = (
+				F0A9739C28533E5700632BF6 /* CountriesViewController.swift */,
+				F0A9739D28533E5700632BF6 /* CountriesViewController.xib */,
+			);
+			path = Country;
+			sourceTree = "<group>";
+		};
+		F0A9739A28533E2400632BF6 /* LocateCity */ = {
+			isa = PBXGroup;
+			children = (
+				F0A973A028533E6700632BF6 /* LocateCitiesViewController.swift */,
+				F0A973A128533E6700632BF6 /* LocateCitiesViewController.xib */,
+			);
+			path = LocateCity;
+			sourceTree = "<group>";
+		};
+		F0A9739B28533E3300632BF6 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				F0A973A428533E7A00632BF6 /* FavoriteViewController.swift */,
+				F0A973A528533E7A00632BF6 /* FavoriteViewController.xib */,
+			);
+			path = Favorite;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,8 +357,11 @@
 			files = (
 				F0A973912853276C00632BF6 /* SplashViewController.xib in Resources */,
 				F0A9734A285326BC00632BF6 /* LaunchScreen.storyboard in Resources */,
+				F0A973A728533E7A00632BF6 /* FavoriteViewController.xib in Resources */,
 				F0A973942853276C00632BF6 /* WebViewController.xib in Resources */,
+				F0A9739F28533E5700632BF6 /* CountriesViewController.xib in Resources */,
 				F0A97347285326BC00632BF6 /* Assets.xcassets in Resources */,
+				F0A973A328533E6700632BF6 /* LocateCitiesViewController.xib in Resources */,
 				F0A97345285326B900632BF6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,6 +426,8 @@
 				F0A973932853276C00632BF6 /* WebViewController.swift in Sources */,
 				F0A9736D2853275900632BF6 /* Constants.swift in Sources */,
 				F0A973612853275500632BF6 /* DefineKeys.swift in Sources */,
+				F0A9739E28533E5700632BF6 /* CountriesViewController.swift in Sources */,
+				F0A973A228533E6700632BF6 /* LocateCitiesViewController.swift in Sources */,
 				F0A973662853275500632BF6 /* AppUtil.swift in Sources */,
 				F0A973602853275500632BF6 /* BaseConstants.swift in Sources */,
 				F0A9735F2853275500632BF6 /* UIView+Extension.swift in Sources */,
@@ -390,6 +437,7 @@
 				F0A9736C2853275900632BF6 /* BackButtonCustom.swift in Sources */,
 				F0A973632853275500632BF6 /* ParameterKey.swift in Sources */,
 				F0A973652853275500632BF6 /* Box.swift in Sources */,
+				F0A973A628533E7A00632BF6 /* FavoriteViewController.swift in Sources */,
 				F0A973762853275F00632BF6 /* DataManagerRealm.swift in Sources */,
 				F0A973902853276C00632BF6 /* SplashViewController.swift in Sources */,
 				F0A973922853276C00632BF6 /* TabbarControllerViewController.swift in Sources */,

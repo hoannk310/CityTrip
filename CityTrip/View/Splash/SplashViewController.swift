@@ -31,7 +31,7 @@ class SplashViewController: UIViewController {
 ////            showWebView(url: remoteConfig!.configValue(forKey: "url").stringValue ?? "")
 ////            return
 ////        }
-//        //showMain()
+       showMain()
     }
     
     private func showMain() {
