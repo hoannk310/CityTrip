@@ -1,38 +1,37 @@
 import UIKit
 import Alamofire
-import FirebaseRemoteConfig
 
 class SplashViewController: UIViewController {
     
-    var remoteConfig = RemoteConfig.remoteConfig()
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        remoteConfig = RemoteConfig.remoteConfig()
-        let settings = RemoteConfigSettings()
-        settings.minimumFetchInterval = 10
-        remoteConfig.configSettings = settings
-        remoteConfig.setDefaults(["appName": false as NSObject])
-        remoteConfig.setDefaults(["url": "" as NSObject])
-        remoteConfig.fetch(withExpirationDuration: 0) { status, error in
-            if status == .success, error == nil {
-                self.remoteConfig.activate { [self] _, erro in
-                    //                    print("test ", self.remoteConfig.configValue(forKey: "appName").boolValue)
-                    //                    print("test ", self.remoteConfig.configValue(forKey: "url").stringValue)
-                    if self.remoteConfig.configValue(forKey: "appName").boolValue {
-                        showWebView(url: remoteConfig.configValue(forKey: "url").stringValue ?? "")
-                        return
-                    }
-                    self.showMain()
-                }
-            }
-        }
-//        if remoteConfig!.configValue(forKey: "appName").boolValue {
-//            showWebView(url: remoteConfig!.configValue(forKey: "url").stringValue ?? "")
-//            return
+//        remoteConfig = RemoteConfig.remoteConfig()
+//        let settings = RemoteConfigSettings()
+//        settings.minimumFetchInterval = 10
+//        remoteConfig.configSettings = settings
+//        remoteConfig.setDefaults(["appName": false as NSObject])
+//        remoteConfig.setDefaults(["url": "" as NSObject])
+//        remoteConfig.fetch(withExpirationDuration: 0) { status, error in
+//            if status == .success, error == nil {
+//                self.remoteConfig.activate { [self] _, erro in
+//                    //                    print("test ", self.remoteConfig.configValue(forKey: "appName").boolValue)
+//                    //                    print("test ", self.remoteConfig.configValue(forKey: "url").stringValue)
+//                    if self.remoteConfig.configValue(forKey: "appName").boolValue {
+//                        showWebView(url: remoteConfig.configValue(forKey: "url").stringValue ?? "")
+//                        return
+//                    }
+//                    self.showMain()
+//                }
+//            }
 //        }
-        //showMain()
+////        if remoteConfig!.configValue(forKey: "appName").boolValue {
+////            showWebView(url: remoteConfig!.configValue(forKey: "url").stringValue ?? "")
+////            return
+////        }
+//        //showMain()
     }
     
     private func showMain() {
