@@ -82,6 +82,13 @@ extension FavoriteViewController: UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = PlaceDetailViewController()
+        vc.id = items[indexPath.row].xid
+        vc.pla = Place(xid: items[indexPath.row].xid, name: items[indexPath.row].name, dist: items[indexPath.row].dist, rate: items[indexPath.row].rate, osm: items[indexPath.row].osm, kinds: items[indexPath.row].xid, point: Point(lat: items[indexPath.row].lat, lon: items[indexPath.row].lon))
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        //        let vc = SFSafariViewController(url: URL(string: items[indexPath.row].urlRepo)!)
 //        //        present(vc, animated: true, completion: nil)

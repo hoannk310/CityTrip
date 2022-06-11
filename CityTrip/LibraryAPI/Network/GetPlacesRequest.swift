@@ -40,6 +40,20 @@ struct GetPlacesRequest: NetworkRequest {
     var lon: Double
 }
 
+struct GetPlacesDetailRequest: NetworkRequest {
+    var path: String { String(format: "xid/%@", id) }
+    
+    var method: String {
+        HTTPMethod.get.rawValue
+    }
+    
+    var parameters: [String : Any]? {
+        [
+         "apikey": apiValue,]
+    }
+    var id: String
+}
+
 struct Place: Codable {
     var xid: String
     var name: String?

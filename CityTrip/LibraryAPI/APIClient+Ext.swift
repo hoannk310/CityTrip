@@ -24,6 +24,10 @@ extension APIClient {
         request(baseUrl: kOpenTripMap, request: GetPlacesRequest(lat: lat, lon: lon), callback: completed)
     }
     
+    func getPlacesDetail(xid: String, completed: @escaping CompletionBlock) {
+        request(baseUrl: kOpenTripMap, request: GetPlacesDetailRequest(id: xid), callback: completed)
+    }
+    
     func detailUserRepo(user: String, parmas: Parameters, completed: @escaping CompletionBlock){
       //  getRequestPathUserClick(path: "\(user)/repos", param: parmas, callback: completed)
     }

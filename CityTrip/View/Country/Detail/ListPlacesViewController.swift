@@ -73,9 +73,9 @@ class ListPlacesViewController: UIViewController {
     
     func favoImage(item: Place) -> UIImage {
         if databaseRealm.getAllItem().contains(where: {$0.xid == item.xid}) {
-            return UIImage(systemName: "star.fill") ?? UIImage()
+            return UIImage(systemName: "heart.fill") ?? UIImage()
         }
-        return UIImage(systemName: "star") ?? UIImage()
+        return UIImage(systemName: "heart") ?? UIImage()
     }
     
     func addFavorite(item: Place) {
@@ -100,6 +100,13 @@ class ListPlacesViewController: UIViewController {
 extension ListPlacesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return places.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = PlaceDetailViewController()
+        vc.id = places[indexPath.row].xid
+        vc.pla = Place(xid: places[indexPath.row].xid, name: places[indexPath.row].name, dist: places[indexPath.row].dist, rate: places[indexPath.row].rate, osm: places[indexPath.row].osm, kinds: places[indexPath.row].xid, point: places[indexPath.row].point)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
