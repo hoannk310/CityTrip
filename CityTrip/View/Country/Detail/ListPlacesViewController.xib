@@ -9,9 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FavoriteViewController" customModule="CityTrip" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ListPlacesViewController" customModule="CityTrip" customModuleProvider="target">
             <connections>
-                <outlet property="tableView" destination="e3g-BA-yCU" id="yX7-CF-4OW"/>
+                <outlet property="placeTableView" destination="kSM-k4-en7" id="hzC-ez-DSN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="e3g-BA-yCU">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="kSM-k4-en7">
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
@@ -28,12 +28,12 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="e3g-BA-yCU" secondAttribute="trailing" id="FGb-Zt-qlX"/>
-                <constraint firstItem="e3g-BA-yCU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="j29-St-vtZ"/>
-                <constraint firstItem="e3g-BA-yCU" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="l4x-d9-Byr"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="e3g-BA-yCU" secondAttribute="bottom" id="rdY-uj-anc"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kSM-k4-en7" secondAttribute="trailing" id="08J-gS-R5w"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="kSM-k4-en7" secondAttribute="bottom" id="16z-rH-DVM"/>
+                <constraint firstItem="kSM-k4-en7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="1vH-dH-Dke"/>
+                <constraint firstItem="kSM-k4-en7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="AX6-kD-xL8"/>
             </constraints>
-            <point key="canvasLocation" x="139" y="64"/>
+            <point key="canvasLocation" x="133" y="82"/>
         </view>
     </objects>
     <resources>

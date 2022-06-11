@@ -12,8 +12,16 @@ extension APIClient {
        request(request: PostCitiesRequest(country: country), callback: completed)
     }
     
-    func searchUser(completed: @escaping CompletionBlock) {
-      //  getRequestPath(path: "proPlayers", callback: completed)
+    func getMyCities(country: String, completed: @escaping CompletionBlock){
+       request(request: PostMyCitiesRequest(country: country), callback: completed)
+    }
+    
+    func getLatLonPlace(name: String, completed: @escaping CompletionBlock) {
+        request(baseUrl: kOpenTripMap, request: GetPlacesLatLonRequest(name: name), callback: completed)
+    }
+    
+    func getPlaces(lat: Double, lon: Double, completed: @escaping CompletionBlock) {
+        request(baseUrl: kOpenTripMap, request: GetPlacesRequest(lat: lat, lon: lon), callback: completed)
     }
     
     func detailUserRepo(user: String, parmas: Parameters, completed: @escaping CompletionBlock){

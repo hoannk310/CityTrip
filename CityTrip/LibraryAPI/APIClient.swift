@@ -6,8 +6,11 @@ import SVProgressHUD
 
 typealias CompletionBlock = (ResponseObject?, Error?) -> Void
 
-class APIClient: Session {
-    
+class APIClient {
+   // var interceptor: RequestInterceptor? = nil
+    var interceptor: RequestInterceptor? = nil
+    static let sharedInstance = APIClient()
+   
     func handlerResponseData(callback: (Data?, Error?)) {
         
     }
@@ -32,39 +35,14 @@ class APIClient: Session {
         return (isReachable && !needsConnection)
     }
     
-//    func getRequestPath (path: String,
-//                         param: Parameters? = nil,
-//                         showLoading: Bool = true,
-//                         callback: @escaping CompletionBlock) {
-//        if !APIClient.isInternetAvailable() {
-//            let errorTemp = NSError(domain: "", code: 10000, userInfo: nil)
-//            callback(ResponseObject(), errorTemp as Error)
-//            return
-//        }
-//        let urlString: String
-//        if path.contains("http") || path.contains("https"){
-//            urlString = path
-//        } else {
-//            urlString = kBaseServer.appending(path)
-//        }
-//        debugPrint("URLAPI", urlString)
-//        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-//        if showLoading && !SVProgressHUD.isVisible() {
-//            SVProgressHUD.show()
-//        }
-//        AF.request(urlString, headers: getHeader()).responseData { [weak self] (response) in
-//            self?.processResponse(response: response, callBack: callback)
-//        }
-//    }
-    
-    func request<Request>(request: Request, showLoading: Bool = true, callback: @escaping CompletionBlock) where Request : NetworkRequest {
+    func request<Request>(baseUrl: String = kBaseServer, request: Request, showLoading: Bool = true, callback: @escaping CompletionBlock) where Request : NetworkRequest {
         if !APIClient.isInternetAvailable() {
             let errorTemp = NSError(domain: "", code: 10000, userInfo: nil)
             callback(ResponseObject(), errorTemp as Error)
             return
         }
         let method = HTTPMethod(rawValue: request.method.uppercased())
-        let url = kBaseServer + request.path
+        let url = baseUrl + request.path
         var parameters: [String: Any]? = request.parameters
         var encoding: ParameterEncoding = URLEncoding.default
         if let body = request.body, let data = body.data as? [String: Any], body.encoding == NetworkUtil.JSON_ENCODING {
@@ -81,34 +59,13 @@ class APIClient: Session {
         if showLoading && !SVProgressHUD.isVisible() {
             SVProgressHUD.show()
         }
-        URLCache.shared.removeAllCachedResponses()
-        AF.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers).responseData { [weak self] (response) in
+        AF.session.configuration.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        URLCache.shared = URLCache(memoryCapacity: 0, diskCapacity: 0, diskPath: nil)
+        AF.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers, interceptor: self.interceptor).responseData { [weak self] (response) in
             self?.processResponse(response: response, callBack: callback)
         }
     }
     
-//    func getRequestPathUserClick(path: String, param: Parameters, showLoading: Bool = true, callback: @escaping CompletionBlock) {
-//        if !APIClient.isInternetAvailable() {
-//            let errorTemp = NSError(domain: "", code: 10000, userInfo: nil)
-//            callback(ResponseObject(),errorTemp as Error)
-//            return
-//        }
-//        let urlString: String
-//        if path.contains("http") || path.contains("https"){
-//            urlString = path
-//        } else {
-//            urlString = kUserRepoServer.appending(path)
-//        }
-//        debugPrint("URLAPI", urlString)
-//        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-//        if showLoading && !SVProgressHUD.isVisible() {
-//            SVProgressHUD.show()
-//        }
-//        AF.request(urlString, parameters: param, headers: getHeader()).responseData {[weak self] (response) in
-//            self?.processResponse(response: response, callBack: callback)
-//        }
-//    }
-//
     func processResponse(response: AFDataResponse<Data>, callBack: @escaping CompletionBlock) {
         SVProgressHUD.dismiss()
         UIApplication.shared.isNetworkActivityIndicatorVisible = false

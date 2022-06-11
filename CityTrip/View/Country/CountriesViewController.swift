@@ -96,7 +96,7 @@ extension CountriesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = CitiesViewController()
-        vc.country = self.sections[indexPath.section].contries[indexPath.row].name
+        vc.country = self.sections[indexPath.section].contries[indexPath.row].name.lowercased()
         navigationController?.pushViewController(vc, animated: true)
     }
     

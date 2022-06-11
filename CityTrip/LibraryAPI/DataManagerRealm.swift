@@ -16,27 +16,27 @@ class DataManagerRealm {
         database = try! Realm()
     }
     
-//    func getAllItem() -> [Favorite] {
-//        let result = database.objects(Favorite.self).toArray(ofType: Favorite.self) as [Favorite]
-//        return result
-//    }
-//    
-//    func addData(object:Favorite){
-//        try! database.write{
-//            database.add(object)
-//        }
-//    }
-//    
-//    func deleteItemFromDB(object: Favorite) -> Bool {
-//        do {
-//            try database.write{
-//                database.delete(object)
-//            }
-//            return true
-//        } catch {
-//            return false
-//        }
-//    }
+    func getAllItem() -> [Favorite] {
+        let result = database.objects(Favorite.self).toArray(ofType: Favorite.self) as [Favorite]
+        return result
+    }
+    
+    func addData(object:Favorite){
+        try! database.write{
+            database.add(object)
+        }
+    }
+    
+    func deleteItemFromDB(object: Favorite) -> Bool {
+        do {
+            try database.write{
+                database.delete(object)
+            }
+            return true
+        } catch {
+            return false
+        }
+    }
     
     func deleteAllFromDB() -> Bool {
         do {

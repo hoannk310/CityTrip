@@ -22,3 +22,18 @@ struct PostCitiesRequest: NetworkRequest {
                            encoding: NetworkUtil.JSON_ENCODING)
     }
 }
+
+struct PostMyCitiesRequest: NetworkRequest {
+    var path: String { "countries/cities" }
+    
+    var method: String {
+        HTTPMethod.post.rawValue
+    }
+    
+    var country: String
+    
+    var body: BodyRequest? {
+        DefaultBodyRequest(data: ["country": country],
+                           encoding: NetworkUtil.JSON_ENCODING)
+    }
+}

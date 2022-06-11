@@ -16,7 +16,6 @@ class LocateCitiesViewController: UIViewController {
     @IBOutlet weak var viewSearch: UIView!
     @IBOutlet weak var searchTF: UITextField!
     
-    var apiClient = APIClient()
     var country = ""
     private var locationManager: CLLocationManager!
     private var cities: [Country] = []
@@ -53,7 +52,7 @@ class LocateCitiesViewController: UIViewController {
     }
     
     func setupData() {
-        apiClient.getCities(country: country, completed: { response, error in
+        APIClient.sharedInstance.getMyCities(country: country, completed: { response, error in
             guard let data = response?.data else { return }
             self.parseData(data: data)
         })
@@ -118,6 +117,12 @@ extension LocateCitiesViewController: UITableViewDelegate, UITableViewDataSource
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CountryTableViewCell.identifier) as? CountryTableViewCell else { return UITableViewCell()}
         cell.nameLabel.text = self.sections[indexPath.section].contries[indexPath.row].name + " " + self.sections[indexPath.section].contries[indexPath.row].flag
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = ListPlacesViewController()
+        vc.name = self.sections[indexPath.section].contries[indexPath.row].name
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

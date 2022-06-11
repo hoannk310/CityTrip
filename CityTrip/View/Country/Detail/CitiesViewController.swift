@@ -104,8 +104,14 @@ extension CitiesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CountryTableViewCell.identifier) as? CountryTableViewCell else { return UITableViewCell()}
-        cell.nameLabel.text = self.sections[indexPath.section].contries[indexPath.row].name + " " + self.sections[indexPath.section].contries[indexPath.row].flag
+        cell.nameLabel.text = self.sections[indexPath.section].contries[indexPath.row].name
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = ListPlacesViewController()
+        vc.name = self.sections[indexPath.section].contries[indexPath.row].name
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
