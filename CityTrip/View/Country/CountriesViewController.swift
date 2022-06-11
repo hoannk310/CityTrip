@@ -38,30 +38,18 @@ class CountriesViewController: UIViewController {
     }
     
     func setupData() {
-        
-      APIClient.sharedInstance.getCountries(completed: { response, error in
-          guard let data = response?.data else { return }
-          self.parseData(data: data)
-        })
-    }
-    
-    func parseData(data: Data) {
-        do {
-           let response = try JSON(data: data)
-            let listData = response["data"].arrayValue
-            listData.forEach { country in
-                let name = country["country"].stringValue
-                if !countries.contains(where: {$0.name == name}) {
-                    countries.append(Country(name: name))
-                }
-            }
-            setDataSections()
-            countriesTableView.reloadData()
-        } catch _ {
-            
+
+        for code in NSLocale.isoCountryCodes  {
+            let flag = String.emojiFlag(for: code) ?? ""
+            let id = NSLocale.localeIdentifier(fromComponents: [NSLocale.Key.countryCode.rawValue: code])
+            let name = NSLocale(localeIdentifier: "en_UK").displayName(forKey: NSLocale.Key.identifier, value: id) ?? "Country not found for code: \(code)"
+            countries.append(Country(name: name, flag: flag, locate: code))
+           
         }
+        print(countries)
+        setDataSections()
     }
-    
+
     func setDataSections(text: String = "") {
         if text.isEmpty {
             countries.forEach { country in
@@ -77,7 +65,7 @@ class CountriesViewController: UIViewController {
             }
             sections = sections.sorted(by: {$0.firstCharacter < $1.firstCharacter})
         } else {
-            let countriesSearch = countries.filter({$0.name.contains(text)})
+            let countriesSearch = countries.filter({$0.name.lowercased().contains(text.lowercased())})
             sections.append(CountriesSection(firstCharacter: "Search results: " + text, contries: countriesSearch))
         }
     }
@@ -102,8 +90,14 @@ extension CountriesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CountryTableViewCell.identifier) as? CountryTableViewCell else { return UITableViewCell()}
-        cell.nameLabel.text = self.sections[indexPath.section].contries[indexPath.row].name
+        cell.nameLabel.text = self.sections[indexPath.section].contries[indexPath.row].name + " " + self.sections[indexPath.section].contries[indexPath.row].flag
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = CitiesViewController()
+        vc.country = self.sections[indexPath.section].contries[indexPath.row].name
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -132,9 +126,35 @@ extension CountriesViewController: UITextFieldDelegate {
 
 struct Country {
     var name: String
+    var flag: String
+    var locate: String
 }
 
 struct CountriesSection {
     var firstCharacter: String
     var contries: [Country]
+}
+
+extension String {
+
+    static func emojiFlag(for countryCode: String) -> String! {
+        func isLowercaseASCIIScalar(_ scalar: Unicode.Scalar) -> Bool {
+            return scalar.value >= 0x61 && scalar.value <= 0x7A
+        }
+
+        func regionalIndicatorSymbol(for scalar: Unicode.Scalar) -> Unicode.Scalar {
+            precondition(isLowercaseASCIIScalar(scalar))
+
+            // 0x1F1E6 marks the start of the Regional Indicator Symbol range and corresponds to 'A'
+            // 0x61 marks the start of the lowercase ASCII alphabet: 'a'
+            return Unicode.Scalar(scalar.value + (0x1F1E6 - 0x61))!
+        }
+
+        let lowercasedCode = countryCode.lowercased()
+        guard lowercasedCode.count == 2 else { return nil }
+        guard lowercasedCode.unicodeScalars.reduce(true, { accum, scalar in accum && isLowercaseASCIIScalar(scalar) }) else { return nil }
+
+        let indicatorSymbols = lowercasedCode.unicodeScalars.map({ regionalIndicatorSymbol(for: $0) })
+        return String(indicatorSymbols.map({ Character($0) }))
+    }
 }

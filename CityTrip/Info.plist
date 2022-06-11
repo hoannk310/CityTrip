@@ -23,5 +23,14 @@
 	</dict>
 	<key>UIUserInterfaceStyle</key>
 	<string>Dark</string>
+    
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Description</string>
+
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Description</string>
+
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Description</string>
 </dict>
 </plist>

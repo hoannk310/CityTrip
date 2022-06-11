@@ -8,15 +8,15 @@
 import Alamofire
 
 extension APIClient {
-    func getCountries(completed: @escaping CompletionBlock){
-        getRequestPath(path: "countries", callback: completed)
+    func getCities(country: String, completed: @escaping CompletionBlock){
+       request(request: PostCitiesRequest(country: country), callback: completed)
     }
     
     func searchUser(completed: @escaping CompletionBlock) {
-        getRequestPath(path: "proPlayers", callback: completed)
+      //  getRequestPath(path: "proPlayers", callback: completed)
     }
     
     func detailUserRepo(user: String, parmas: Parameters, completed: @escaping CompletionBlock){
-        getRequestPathUserClick(path: "\(user)/repos", param: parmas, callback: completed)
+      //  getRequestPathUserClick(path: "\(user)/repos", param: parmas, callback: completed)
     }
 }

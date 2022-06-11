@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2BE6A7BFA7CA532415518C50 /* Pods_CityTrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DF21A2989C40486FD4FB1 /* Pods_CityTrip.framework */; };
+		40D0AB4728546DB4009027FD /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D0AB4628546DB4009027FD /* NetworkUtils.swift */; };
+		40D0AB49285472A9009027FD /* PostCitiesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D0AB48285472A9009027FD /* PostCitiesRequest.swift */; };
+		40D0AB4D28548A84009027FD /* CitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D0AB4B28548A84009027FD /* CitiesViewController.swift */; };
+		40D0AB4E28548A84009027FD /* CitiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40D0AB4C28548A84009027FD /* CitiesViewController.xib */; };
 		F0A9733E285326B900632BF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9733D285326B900632BF6 /* AppDelegate.swift */; };
 		F0A97340285326B900632BF6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A9733F285326B900632BF6 /* SceneDelegate.swift */; };
 		F0A97342285326B900632BF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A97341285326B900632BF6 /* ViewController.swift */; };
@@ -47,6 +51,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		40D0AB4628546DB4009027FD /* NetworkUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkUtils.swift; sourceTree = "<group>"; };
+		40D0AB48285472A9009027FD /* PostCitiesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCitiesRequest.swift; sourceTree = "<group>"; };
+		40D0AB4B28548A84009027FD /* CitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesViewController.swift; sourceTree = "<group>"; };
+		40D0AB4C28548A84009027FD /* CitiesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CitiesViewController.xib; sourceTree = "<group>"; };
 		847DF21A2989C40486FD4FB1 /* Pods_CityTrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CityTrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		914C10D7F43A1415824910C6 /* Pods-CityTrip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CityTrip.release.xcconfig"; path = "Target Support Files/Pods-CityTrip/Pods-CityTrip.release.xcconfig"; sourceTree = "<group>"; };
 		BFC70D4E569BCE6B89B047C4 /* Pods-CityTrip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CityTrip.debug.xcconfig"; path = "Target Support Files/Pods-CityTrip/Pods-CityTrip.debug.xcconfig"; sourceTree = "<group>"; };
@@ -102,6 +110,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		40D0AB4528546DA3009027FD /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				40D0AB4628546DB4009027FD /* NetworkUtils.swift */,
+				40D0AB48285472A9009027FD /* PostCitiesRequest.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		40D0AB4A28548A6E009027FD /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				40D0AB4B28548A84009027FD /* CitiesViewController.swift */,
+				40D0AB4C28548A84009027FD /* CitiesViewController.xib */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		BC4DD7421D2D61E1D7552981 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +230,7 @@
 		F0A9736E2853275F00632BF6 /* LibraryAPI */ = {
 			isa = PBXGroup;
 			children = (
+				40D0AB4528546DA3009027FD /* Network */,
 				F0A9736F2853275F00632BF6 /* JsonDatabase */,
 				F0A973712853275F00632BF6 /* APIClient.swift */,
 				F0A973722853275F00632BF6 /* DataManagerRealm.swift */,
@@ -275,6 +302,7 @@
 		F0A9739928533E1600632BF6 /* Country */ = {
 			isa = PBXGroup;
 			children = (
+				40D0AB4A28548A6E009027FD /* Detail */,
 				F0A973A82853504F00632BF6 /* Cell */,
 				F0A9739C28533E5700632BF6 /* CountriesViewController.swift */,
 				F0A9739D28533E5700632BF6 /* CountriesViewController.xib */,
@@ -378,6 +406,7 @@
 				F0A973AC2853506700632BF6 /* CountryTableViewCell.xib in Resources */,
 				F0A973A328533E6700632BF6 /* LocateCitiesViewController.xib in Resources */,
 				F0A97345285326B900632BF6 /* Main.storyboard in Resources */,
+				40D0AB4E28548A84009027FD /* CitiesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,8 +469,10 @@
 				F0A9733E285326B900632BF6 /* AppDelegate.swift in Sources */,
 				F0A973932853276C00632BF6 /* WebViewController.swift in Sources */,
 				F0A9736D2853275900632BF6 /* Constants.swift in Sources */,
+				40D0AB49285472A9009027FD /* PostCitiesRequest.swift in Sources */,
 				F0A973612853275500632BF6 /* DefineKeys.swift in Sources */,
 				F0A9739E28533E5700632BF6 /* CountriesViewController.swift in Sources */,
+				40D0AB4728546DB4009027FD /* NetworkUtils.swift in Sources */,
 				F0A973A228533E6700632BF6 /* LocateCitiesViewController.swift in Sources */,
 				F0A973662853275500632BF6 /* AppUtil.swift in Sources */,
 				F0A973602853275500632BF6 /* BaseConstants.swift in Sources */,
@@ -449,6 +480,7 @@
 				F0A97340285326B900632BF6 /* SceneDelegate.swift in Sources */,
 				F0A973772853275F00632BF6 /* APIClient+Ext.swift in Sources */,
 				F0A973AB2853506700632BF6 /* CountryTableViewCell.swift in Sources */,
+				40D0AB4D28548A84009027FD /* CitiesViewController.swift in Sources */,
 				F0A973672853275500632BF6 /* KeyedDegodingContainer.swift in Sources */,
 				F0A9736C2853275900632BF6 /* BackButtonCustom.swift in Sources */,
 				F0A973632853275500632BF6 /* ParameterKey.swift in Sources */,
@@ -604,7 +636,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PC5N6RG4W4;
+				DEVELOPMENT_TEAM = KH8N4M9AZC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CityTrip/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -634,7 +666,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PC5N6RG4W4;
+				DEVELOPMENT_TEAM = KH8N4M9AZC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CityTrip/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

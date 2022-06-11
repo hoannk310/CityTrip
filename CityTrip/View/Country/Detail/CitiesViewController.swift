@@ -1,30 +1,28 @@
 //
-//  LocateCitiesViewController.swift
+//  CitiesViewController.swift
 //  CityTrip
 //
-//  Created by nguyen.khai.hoan on 10/06/2022.
+//  Created by Hoan on 11/06/2022.
 //
 
 import UIKit
 import SwiftyJSON
 import SVProgressHUD
-import CoreLocation
 
-class LocateCitiesViewController: UIViewController {
+class CitiesViewController: UIViewController {
     
-    @IBOutlet weak var citiesTableView: UITableView!
-    @IBOutlet weak var viewSearch: UIView!
     @IBOutlet weak var searchTF: UITextField!
+    @IBOutlet weak var viewSearch: UIView!
+    @IBOutlet weak var citiesTableView: UITableView!
     
     var apiClient = APIClient()
     var country = ""
-    private var locationManager: CLLocationManager!
     private var cities: [Country] = []
     private var sections: [CountriesSection] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        setupContry()
+        setupData()
         setupTextField()
         viewSearch.layer.cornerRadius = 15
         citiesTableView.keyboardDismissMode = .onDrag
@@ -40,16 +38,6 @@ class LocateCitiesViewController: UIViewController {
     
     func setupTextField() {
         searchTF.delegate = self
-    }
-    
-    func setupContry() {
-        if (CLLocationManager.locationServicesEnabled()) {
-            locationManager = CLLocationManager()
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestAlwaysAuthorization()
-            locationManager.startUpdatingLocation()
-        }
     }
     
     func setupData() {
@@ -105,7 +93,7 @@ class LocateCitiesViewController: UIViewController {
     }
 }
 
-extension LocateCitiesViewController: UITableViewDelegate, UITableViewDataSource {
+extension CitiesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.sections[section].contries.count
     }
@@ -125,7 +113,7 @@ extension LocateCitiesViewController: UITableViewDelegate, UITableViewDataSource
     }
 }
 
-extension LocateCitiesViewController: UITextFieldDelegate {
+extension CitiesViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(handleSearchTextField), object: nil)
         SVProgressHUD.show()
@@ -143,36 +131,3 @@ extension LocateCitiesViewController: UITextFieldDelegate {
     }
 }
 
-extension LocateCitiesViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location: CLLocation = manager.location else { return }
-        fetchAndCountry(from: location)
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-          switch status {
-          case .notDetermined:
-              manager.requestWhenInUseAuthorization()
-          case .restricted, .denied:
-              citiesTableView.isHidden = true
-          case .authorizedAlways, .authorizedWhenInUse:
-              guard let location: CLLocation = manager.location else { return }
-              fetchAndCountry(from: location)
-              citiesTableView.isHidden = false
-          @unknown default:
-              break
-          }
-      }
-    
-    func fetchAndCountry(from location: CLLocation) {
-        let locale = Locale(identifier: "en_UK")
-        CLGeocoder().reverseGeocodeLocation(location, preferredLocale: locale) { placemarks, error in
-            self.country = placemarks?.first?.country ?? ""
-        }
-        if !country.isEmpty {
-            citiesTableView.isHidden = false
-            setupData()
-            locationManager.stopUpdatingLocation()
-        }
-    }
-}
